@@ -112,7 +112,7 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.section-header, .feature-card, .collection-card, .cta-container').forEach((el) => {
+  document.querySelectorAll('.section-header, .feature-card, .collection-card, .cta-container, .contact-item, .contact-map').forEach((el) => {
     // Only hide things that start below the screen, so nothing visible blinks on load
     if (el.getBoundingClientRect().top > window.innerHeight) {
       el.classList.add('reveal');
@@ -120,6 +120,25 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     }
   });
 }
+
+
+
+/* --- WhatsApp chat button: close on outside click or Escape --- */
+
+const waWidget = document.getElementById('wa-widget');
+
+document.addEventListener('click', (event) => {
+  if (waWidget.open && !waWidget.contains(event.target)) {
+    waWidget.open = false;
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && waWidget.open) {
+    waWidget.open = false;
+    waWidget.querySelector('summary').focus();
+  }
+});
 
 
 

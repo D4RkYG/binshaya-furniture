@@ -125,6 +125,18 @@ h2 {
   margin-bottom: var(--space-xl);
 }
 
+/* Hidden on screen but still read out by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .eyebrow {
   display: inline-block;
   text-transform: uppercase;
@@ -183,7 +195,7 @@ h2 {
 
 /* Added by script.js once the page is scrolled */
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(8px);
   box-shadow: 0 6px 20px rgba(27, 42, 75, 0.12);
 }
@@ -357,7 +369,9 @@ h2 {
   transition: var(--transition);
 }
 
-.feature-icon svg {
+/* Shared look for the line icons (features and contact) */
+.feature-icon svg,
+.contact-icon svg {
   width: 30px;
   height: 30px;
   fill: none;
@@ -391,6 +405,8 @@ h2 {
 }
 
 .collection-card {
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--color-white);
@@ -415,7 +431,16 @@ h2 {
 }
 
 .collection-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: var(--space-md);
+}
+
+/* Keeps the enquiry links lined up along the bottom of every card */
+.collection-info .text-link {
+  margin-top: auto;
 }
 
 .collection-info h3 {
@@ -441,7 +466,7 @@ h2 {
 }
 
 
-/* --- CTA and Footer Section --- */
+/* --- CTA Section --- */
 
 .cta {
   background: var(--color-navy);
@@ -459,6 +484,184 @@ h2 {
   max-width: 500px;
   margin-inline: auto;
 }
+
+/* --- Contact Section --- */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-xl);
+}
+
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg) var(--space-md);
+  align-content: start;
+}
+
+.contact-item {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.14);
+  color: var(--color-navy);
+}
+
+.contact-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-icon svg.icon-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.contact-item h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.contact-item p,
+.contact-list li {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.contact-item p + p,
+.contact-list li + li {
+  margin-top: 0.2rem;
+}
+
+.contact-list a {
+  white-space: nowrap; /* keeps each name and number together on one line */
+}
+
+.contact-item p + .text-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+
+.contact-item a:not(.text-link) {
+  color: var(--color-navy);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.contact-item a:not(.text-link):hover {
+  color: var(--color-blue);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+
+/* --- WhatsApp chat button --- */
+
+.wa-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+}
+
+.wa-button {
+  list-style: none; /* hides the default ▶ marker of <summary> */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #179848; /* WhatsApp green, darkened so the white icon stays clear */
+  color: var(--color-white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wa-button::-webkit-details-marker {
+  display: none;
+}
+
+.wa-button:hover {
+  transform: scale(1.06);
+}
+
+.wa-button svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.wa-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: 280px;
+  padding: var(--space-md);
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.wa-title {
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.wa-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xs);
+}
+
+.wa-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: 0.6rem 0.75rem;
+  margin-inline: -0.75rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.wa-list a:hover {
+  background: var(--color-offwhite);
+}
+
+.wa-name {
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.wa-number {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+
+/* --- Footer --- */
 
 .site-footer {
   background: var(--color-navy-dark);
@@ -579,6 +782,14 @@ h2 {
   .footer-brand {
     grid-column: 1 / -1;
   }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map iframe {
+    min-height: 320px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -626,6 +837,10 @@ h2 {
   .footer-brand .logo {
     justify-content: center;
   }
+
+  .contact-details {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Respect the "reduce motion" setting in the visitor's OS */
@@ -642,7 +857,8 @@ h2 {
   .btn-outline:hover,
   .feature-card:hover,
   .collection-card:hover,
-  .collection-card:hover img {
+  .collection-card:hover img,
+  .wa-button:hover {
     transform: none;
   }
 }
