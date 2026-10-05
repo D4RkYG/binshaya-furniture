@@ -328,9 +328,30 @@ h2 {
 }
 
 .feature-icon {
-  font-size: 2.2rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.14);
+  color: var(--color-navy);
   margin-bottom: var(--space-sm);
+  transition: var(--transition);
+}
+
+.feature-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature-card:hover .feature-icon {
+  background: var(--color-gold);
 }
 
 .feature-card h3 {
