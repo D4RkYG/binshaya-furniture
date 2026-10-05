@@ -54,6 +54,77 @@ document.addEventListener('keydown', (event) => {
 
 
 
+/* --- Theme switcher: Light / System / Dark --- */
+// "System" removes data-theme so the CSS follows the device setting.
+// The saved choice is applied by a small script in <head> before the page is drawn.
+
+const root = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const themeMenu = document.getElementById('theme-menu');
+const themeButtons = themeMenu.querySelectorAll('[data-theme-choice]');
+
+function showThemeChoice(choice) {
+  themeButtons.forEach((button) => {
+    button.setAttribute('aria-pressed', button.dataset.themeChoice === choice);
+  });
+}
+
+function setTheme(choice) {
+  if (choice === 'light' || choice === 'dark') {
+    root.dataset.theme = choice;
+  } else {
+    delete root.dataset.theme;
+  }
+
+  try {
+    if (choice === 'system') {
+      localStorage.removeItem('theme');
+    } else {
+      localStorage.setItem('theme', choice);
+    }
+  } catch (error) {
+    // Private browsing can block storage; the theme still changes for this visit
+  }
+
+  showThemeChoice(choice);
+}
+
+function closeThemeMenu() {
+  themeMenu.hidden = true;
+  themeToggle.setAttribute('aria-expanded', 'false');
+}
+
+themeToggle.addEventListener('click', () => {
+  const willOpen = themeMenu.hidden;
+  themeMenu.hidden = !willOpen;
+  themeToggle.setAttribute('aria-expanded', willOpen);
+});
+
+themeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    setTheme(button.dataset.themeChoice);
+    closeThemeMenu();
+    themeToggle.focus();
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (!themeMenu.hidden && !themeMenu.contains(event.target) && !themeToggle.contains(event.target)) {
+    closeThemeMenu();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !themeMenu.hidden) {
+    closeThemeMenu();
+    themeToggle.focus();
+  }
+});
+
+showThemeChoice(root.dataset.theme || 'system');
+
+
+
 /* --- Header shadow and active nav link while scrolling --- */
 
 const siteHeader = document.querySelector('.site-header');
