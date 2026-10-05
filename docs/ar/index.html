@@ -17,10 +17,10 @@
 
     <title> مفروشات بن شائع | معرض أثاث في نزوى، عُمان </title>
 
-    <link rel = "canonical" href = "https://binshaya-furniture.github.io/ar/">
-    <link rel = "alternate" hreflang = "en" href = "https://binshaya-furniture.github.io/">
-    <link rel = "alternate" hreflang = "ar" href = "https://binshaya-furniture.github.io/ar/">
-    <link rel = "alternate" hreflang = "x-default" href = "https://binshaya-furniture.github.io/">
+    <link rel = "canonical" href = "https://d4rkyg.github.io/binshaya-furniture/ar/">
+    <link rel = "alternate" hreflang = "en" href = "https://d4rkyg.github.io/binshaya-furniture/">
+    <link rel = "alternate" hreflang = "ar" href = "https://d4rkyg.github.io/binshaya-furniture/ar/">
+    <link rel = "alternate" hreflang = "x-default" href = "https://d4rkyg.github.io/binshaya-furniture/">
     <link rel = "icon" href = "../assets/images/logo-96.png" type = "image/png" sizes = "96x96">
     <link rel = "apple-touch-icon" href = "../assets/images/apple-touch-icon.png">
 
@@ -29,8 +29,8 @@
     <meta property = "og:site_name" content = "مفروشات بن شائع">
     <meta property = "og:title" content = "مفروشات بن شائع | معرض أثاث في نزوى، عُمان">
     <meta property = "og:description" content = "كنب وغرف نوم وطاولات طعام وأثاث مكتبي، مع التوصيل والتركيب والتفصيل حسب المقاس. زوروا معرضنا في فرق، نزوى.">
-    <meta property = "og:url" content = "https://binshaya-furniture.github.io/ar/">
-    <meta property = "og:image" content = "https://binshaya-furniture.github.io/assets/images/og-image-ar.jpg">
+    <meta property = "og:url" content = "https://d4rkyg.github.io/binshaya-furniture/ar/">
+    <meta property = "og:image" content = "https://d4rkyg.github.io/binshaya-furniture/assets/images/og-image-ar.jpg">
     <meta property = "og:image:width" content = "1200">
     <meta property = "og:image:height" content = "630">
     <meta property = "og:image:alt" content = "معرض مفروشات بن شائع في نزوى، عُمان">
@@ -45,9 +45,9 @@
         "@type": "FurnitureStore",
         "name": "مفروشات بن شائع",
         "alternateName": "Bin Shaya'a Furniture",
-        "url": "https://binshaya-furniture.github.io/ar/",
-        "logo": "https://binshaya-furniture.github.io/assets/images/logo.png",
-        "image": "https://binshaya-furniture.github.io/assets/images/og-image-ar.jpg",
+        "url": "https://d4rkyg.github.io/binshaya-furniture/ar/",
+        "logo": "https://d4rkyg.github.io/binshaya-furniture/assets/images/logo.png",
+        "image": "https://d4rkyg.github.io/binshaya-furniture/assets/images/og-image-ar.jpg",
         "telephone": "+96825410773",
         "email": "binshaya950@gmail.com",
         "address": {
@@ -84,7 +84,7 @@
     <!-- Google Fonts -->
     <link rel = "preconnect" href = "https://fonts.googleapis.com">
     <link rel = "preconnect" href = "https://fonts.gstatic.com" crossorigin>
-    <link href = "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@600..700&display=swap" rel = "stylesheet">
+    <link href = "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Jost:wght@600&family=Noto+Naskh+Arabic:wght@600..700&display=swap" rel = "stylesheet">
 
     <link rel = "stylesheet" href = "../css/style.css">
 
@@ -96,7 +96,9 @@
 
             <a href = "#home" class = "logo">
                 <img src = "../assets/images/logo-96.png" class = "logo-img" alt = "" width = "96" height = "96">
-                <span class = "logo-text"> بن شائع </span>
+                <span class = "logo-wordmark">
+                    <span class = "logo-text"> بن شائع </span>
+                </span>
             </a>
 
             <nav class = "main-nav" id = "main-nav" aria-label = "القائمة الرئيسية">
@@ -112,26 +114,48 @@
 
             <div class = "header-actions">
 
-                <a href = "../" class = "lang-switch" lang = "en" hreflang = "en"> English </a>
+                <div class = "dropdown">
+                    <button type = "button" class = "dropdown-toggle" id = "lang-toggle" aria-label = "اللغة (العربية)" aria-haspopup = "true" aria-expanded = "false" aria-controls = "lang-menu">
+                        <svg viewBox = "0 0 24 24" aria-hidden = "true"><circle cx = "12" cy = "12" r = "9"/><path d = "M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                        <span class = "lang-name"> العربية </span>
+                        <svg class = "chevron" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class = "dropdown-menu" id = "lang-menu" hidden>
+                        <a href = "../" class = "dropdown-item" lang = "en" hreflang = "en">
+                            <span class = "lang-code"> EN </span>
+                            English
+                            <svg class = "check" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m5 12 5 5 9-10"/></svg>
+                        </a>
+                        <a href = "./" class = "dropdown-item" lang = "ar" hreflang = "ar" aria-current = "page">
+                            <span class = "lang-code"> ع </span>
+                            العربية
+                            <svg class = "check" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m5 12 5 5 9-10"/></svg>
+                        </a>
+                    </div>
+                </div>
 
-                <div class = "theme-switcher">
-                    <button type = "button" class = "theme-toggle" id = "theme-toggle" aria-label = "المظهر" aria-haspopup = "true" aria-expanded = "false" aria-controls = "theme-menu">
+                <div class = "dropdown">
+                    <button type = "button" class = "dropdown-toggle" id = "theme-toggle" aria-label = "المظهر" aria-haspopup = "true" aria-expanded = "false" aria-controls = "theme-menu">
                         <svg class = "theme-icon theme-icon-light" viewBox = "0 0 24 24" aria-hidden = "true"><circle cx = "12" cy = "12" r = "4"/><path d = "M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
                         <svg class = "theme-icon theme-icon-dark" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
                         <svg class = "theme-icon theme-icon-system" viewBox = "0 0 24 24" aria-hidden = "true"><rect x = "3" y = "4" width = "18" height = "12" rx = "2"/><path d = "M8 20h8M12 16v4"/></svg>
+                        <svg class = "chevron" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m6 9 6 6 6-6"/></svg>
                     </button>
-                    <div class = "theme-menu" id = "theme-menu" role = "group" aria-label = "المظهر" hidden>
-                        <button type = "button" data-theme-choice = "light" aria-pressed = "false">
+                    <div class = "dropdown-menu" id = "theme-menu" role = "group" aria-label = "المظهر" hidden>
+                        <button type = "button" class = "dropdown-item" data-theme-choice = "light" aria-pressed = "false">
                             <svg viewBox = "0 0 24 24" aria-hidden = "true"><circle cx = "12" cy = "12" r = "4"/><path d = "M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
                             فاتح
+                            <svg class = "check" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m5 12 5 5 9-10"/></svg>
                         </button>
-                        <button type = "button" data-theme-choice = "system" aria-pressed = "true">
+                        <button type = "button" class = "dropdown-item" data-theme-choice = "system" aria-pressed = "true">
                             <svg viewBox = "0 0 24 24" aria-hidden = "true"><rect x = "3" y = "4" width = "18" height = "12" rx = "2"/><path d = "M8 20h8M12 16v4"/></svg>
                             حسب الجهاز
+                            <svg class = "check" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m5 12 5 5 9-10"/></svg>
                         </button>
-                        <button type = "button" data-theme-choice = "dark" aria-pressed = "false">
+                        <button type = "button" class = "dropdown-item" data-theme-choice = "dark" aria-pressed = "false">
                             <svg viewBox = "0 0 24 24" aria-hidden = "true"><path d = "M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
                             داكن
+                            <svg class = "check" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "m5 12 5 5 9-10"/></svg>
                         </button>
                     </div>
                 </div>
@@ -293,7 +317,7 @@
 
         <!-- Contact section -->
 
-        <section class = "contact section" id = "contact">
+        <section class = "contact section section-alt" id = "contact">
             <div class = "container">
 
                 <div class = "section-header">
@@ -301,83 +325,137 @@
                     <h2> زوروا معرضنا في نزوى </h2>
                 </div>
 
-                <div class = "contact-grid">
+                <div class = "contact-cards">
 
-                    <div class = "contact-details">
-
-                        <div class = "contact-item">
-                            <span class = "contact-icon" aria-hidden = "true">
-                                <svg viewBox = "0 0 24 24"><path d = "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx = "12" cy = "9.5" r = "2.5"/></svg>
-                            </span>
-                            <div>
+                    <article class = "contact-card contact-card-showroom">
+                        <div class = "contact-card-body">
+                            <div class = "contact-card-head">
+                                <span class = "contact-icon" aria-hidden = "true">
+                                    <svg viewBox = "0 0 24 24"><path d = "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx = "12" cy = "9.5" r = "2.5"/></svg>
+                                </span>
                                 <h3> المعرض </h3>
-                                <p> شارع الوكالات، فرق، نزوى، عُمان </p>
-                                <a href = "https://maps.app.goo.gl/mPP3jFH5fj2A8CNR6" class = "text-link" target = "_blank" rel = "noopener"> احصل على الاتجاهات &larr;</a>
+                            </div>
+                            <p> شارع الوكالات، فرق، نزوى، عُمان </p>
+                            <div class = "contact-actions">
+                                <a href = "https://maps.app.goo.gl/mPP3jFH5fj2A8CNR6" class = "btn btn-primary btn-sm" target = "_blank" rel = "noopener"> احصل على الاتجاهات </a>
                             </div>
                         </div>
+                        <div class = "contact-map">
+                            <iframe src = "https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1s22.8949019,57.5307209!6i16" title = "خريطة توضح موقع معرض مفروشات بن شائع في فرق، نزوى" loading = "lazy" referrerpolicy = "no-referrer-when-downgrade" allowfullscreen></iframe>
+                        </div>
+                    </article>
 
-                        <div class = "contact-item">
+                    <article class = "contact-card contact-card-hours">
+                        <div class = "contact-card-head">
                             <span class = "contact-icon" aria-hidden = "true">
                                 <svg viewBox = "0 0 24 24"><circle cx = "12" cy = "12" r = "9"/><path d = "M12 7v5l3 2"/></svg>
                             </span>
-                            <div>
-                                <h3> أوقات العمل </h3>
-                                <p><strong> السبت &ndash; الخميس: </strong> 8:00 ص &ndash; 1:00 م و 4:00 م &ndash; 9:00 م </p>
-                                <p><strong> الجمعة: </strong> 4:00 م &ndash; 9:00 م </p>
-                            </div>
+                            <h3> أوقات العمل </h3>
                         </div>
+                        <p class = "open-status" id = "open-status" aria-live = "polite" hidden></p>
+                        <ul class = "hours-list">
+                            <li data-days = "6,0,1,2,3,4">
+                                <span class = "hours-day"> السبت &ndash; الخميس </span>
+                                <span class = "hours-time"> 8:00 ص &ndash; 1:00 م <br> 4:00 م &ndash; 9:00 م </span>
+                            </li>
+                            <li data-days = "5">
+                                <span class = "hours-day"> الجمعة </span>
+                                <span class = "hours-time"> 4:00 م &ndash; 9:00 م </span>
+                            </li>
+                        </ul>
+                        <p class = "contact-note"> قد تتغير الأوقات في العطل الرسمية. </p>
+                    </article>
 
-                        <div class = "contact-item">
+                    <article class = "contact-card contact-card-whatsapp">
+                        <div class = "contact-card-head">
                             <span class = "contact-icon" aria-hidden = "true">
                                 <svg viewBox = "0 0 24 24" class = "icon-fill"><path d = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                             </span>
-                            <div>
-                                <h3> واتساب: الطلبات والاستفسارات المباشرة </h3>
-                                <ul class = "contact-list">
-                                    <li><a href = "https://wa.me/96899435106?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." target = "_blank" rel = "noopener"> محمد &middot; <span dir = "ltr">+968 9943 5106</span> </a></li>
-                                    <li><a href = "https://wa.me/96899221046?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." target = "_blank" rel = "noopener"> أحمد &middot; <span dir = "ltr">+968 9922 1046</span> </a></li>
-                                    <li><a href = "https://wa.me/96899747817?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." target = "_blank" rel = "noopener"> حنيف &middot; <span dir = "ltr">+968 9974 7817</span> </a></li>
-                                </ul>
-                            </div>
+                            <h3> واتساب </h3>
                         </div>
+                        <p> الطلبات والاستفسارات المباشرة </p>
+                        <ul class = "wa-contacts">
+                                <li>
+                                    <a href = "https://wa.me/96899435106?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." class = "wa-contact" target = "_blank" rel = "noopener">
+                                        <span class = "wa-avatar" aria-hidden = "true"> م </span>
+                                        <span class = "wa-contact-text">
+                                            <span class = "wa-contact-name"> محمد </span>
+                                            <span class = "wa-contact-number"> +968 9943 5106 </span>
+                                        </span>
+                                        <svg class = "arrow" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "M5 12h14M13 6l6 6-6 6"/></svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href = "https://wa.me/96899221046?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." class = "wa-contact" target = "_blank" rel = "noopener">
+                                        <span class = "wa-avatar" aria-hidden = "true"> أ </span>
+                                        <span class = "wa-contact-text">
+                                            <span class = "wa-contact-name"> أحمد </span>
+                                            <span class = "wa-contact-number"> +968 9922 1046 </span>
+                                        </span>
+                                        <svg class = "arrow" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "M5 12h14M13 6l6 6-6 6"/></svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href = "https://wa.me/96899747817?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA%20%D8%A8%D9%86%20%D8%B4%D8%A7%D8%A6%D8%B9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." class = "wa-contact" target = "_blank" rel = "noopener">
+                                        <span class = "wa-avatar" aria-hidden = "true"> ح </span>
+                                        <span class = "wa-contact-text">
+                                            <span class = "wa-contact-name"> حنيف </span>
+                                            <span class = "wa-contact-number"> +968 9974 7817 </span>
+                                        </span>
+                                        <svg class = "arrow" viewBox = "0 0 24 24" aria-hidden = "true"><path d = "M5 12h14M13 6l6 6-6 6"/></svg>
+                                    </a>
+                                </li>
+                        </ul>
+                    </article>
 
-                        <div class = "contact-item">
+                    <article class = "contact-card contact-card-hotline">
+                        <div class = "contact-card-head">
                             <span class = "contact-icon" aria-hidden = "true">
                                 <svg viewBox = "0 0 24 24"><rect x = "7" y = "2.5" width = "10" height = "19" rx = "2"/><path d = "M11 18.5h2"/></svg>
                             </span>
-                            <div>
-                                <h3> الهاتف </h3>
-                                <p><a href = "tel:+96825410773" dir = "ltr"> +968 2541 0773 </a></p>
-                            </div>
+                            <h3> الهاتف </h3>
                         </div>
+                        <p> اتصلوا بنا خلال أوقات العمل </p>
+                        <p class = "contact-value"><a href = "tel:+96825410773" dir = "ltr"> +968 2541 0773 </a></p>
+                        <div class = "contact-actions">
+                            <a href = "tel:+96825410773" class = "btn btn-primary btn-sm"> اتصل الآن </a>
+                            <button type = "button" class = "btn btn-outline btn-sm" data-copy = "+968 2541 0773" data-copied = "تم النسخ" aria-live = "polite"> نسخ الرقم </button>
+                        </div>
+                    </article>
 
-                        <div class = "contact-item">
+                    <article class = "contact-card contact-card-email">
+                        <div class = "contact-card-head">
                             <span class = "contact-icon" aria-hidden = "true">
                                 <svg viewBox = "0 0 24 24"><rect x = "3" y = "5" width = "18" height = "14" rx = "2"/><path d = "m3 7 9 6 9-6"/></svg>
                             </span>
-                            <div>
-                                <h3> الاستفسارات عبر البريد </h3>
-                                <p><a href = "mailto:binshaya950@gmail.com"> binshaya950@gmail.com </a></p>
-                            </div>
+                            <h3> البريد الإلكتروني </h3>
                         </div>
+                        <p> للاستفسارات وعروض الأسعار </p>
+                        <p class = "contact-value"><a href = "mailto:binshaya950@gmail.com"> binshaya950@gmail.com </a></p>
+                        <div class = "contact-actions">
+                            <a href = "mailto:binshaya950@gmail.com" class = "btn btn-primary btn-sm"> أرسل بريداً </a>
+                            <button type = "button" class = "btn btn-outline btn-sm" data-copy = "binshaya950@gmail.com" data-copied = "تم النسخ" aria-live = "polite"> نسخ البريد </button>
+                        </div>
+                    </article>
 
-                        <div class = "contact-item">
+                    <article class = "contact-card contact-card-instagram">
+                        <div class = "contact-card-head">
                             <span class = "contact-icon" aria-hidden = "true">
                                 <svg viewBox = "0 0 24 24"><rect x = "3" y = "3" width = "18" height = "18" rx = "5"/><circle cx = "12" cy = "12" r = "4"/><circle cx = "17.5" cy = "6.5" r = "0.6"/></svg>
                             </span>
                             <div>
                                 <h3> إنستغرام </h3>
-                                <p><a href = "https://www.instagram.com/binshaya_nizwa773/" target = "_blank" rel = "noopener" dir = "ltr"> @binshaya_nizwa773 </a></p>
+                                <p> أحدث المنتجات والعروض </p>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class = "contact-map">
-                        <iframe src = "https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1s22.8949019,57.5307209!6i16" title = "خريطة توضح موقع معرض مفروشات بن شائع في فرق، نزوى" loading = "lazy" referrerpolicy = "no-referrer-when-downgrade" allowfullscreen></iframe>
-                    </div>
+                        <p class = "contact-value"><a href = "https://www.instagram.com/binshaya_nizwa773/" target = "_blank" rel = "noopener" dir = "ltr"> @binshaya_nizwa773 </a></p>
+                        <div class = "contact-actions">
+                            <a href = "https://www.instagram.com/binshaya_nizwa773/" class = "btn btn-primary btn-sm" target = "_blank" rel = "noopener"> تابعونا </a>
+                        </div>
+                    </article>
 
                 </div>
+
 
             </div>
         </section>
@@ -392,7 +470,9 @@
             <div class = "footer-brand">
                 <a href = "#home" class = "logo">
                     <img src = "../assets/images/logo-96.png" class = "logo-img" alt = "" width = "96" height = "96">
-                    <span class = "logo-text"> بن شائع </span>
+                    <span class = "logo-wordmark">
+                        <span class = "logo-text"> بن شائع </span>
+                    </span>
                 </a>
                 <p> أثاث عالي الجودة للمنازل والمكاتب.</p>
             </div>
