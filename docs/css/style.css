@@ -66,12 +66,17 @@ button {
   --header-bg-scrolled: rgba(255, 255, 255, 0.96);
   --cta-bg: #1B2A4B;
   --footer-bg: #131F38;
+  --success: #12753A;
+  --success-bg: rgba(18, 117, 58, 0.1);
+  --danger: #B42318;
+  --danger-bg: rgba(180, 35, 24, 0.08);
 
   /* Typography */
   /* Fraunces for English headings, Noto Naskh Arabic for Arabic ones;
      IBM Plex Sans Arabic covers body text in both languages */
   --font-heading: 'Fraunces', 'Noto Naskh Arabic', serif;
   --font-body: 'IBM Plex Sans Arabic', sans-serif;
+  --font-brand: 'Jost', 'Noto Naskh Arabic', sans-serif; /* logo name only */
 
   /* Spacing scale */
   --space-xs: 0.5rem;
@@ -83,6 +88,7 @@ button {
 
   /* Shape & motion */
   --radius: 10px;
+  --radius-lg: 16px;
   --shadow: 0 10px 30px rgba(27, 42, 75, 0.08);
   --shadow-lg: 0 18px 40px rgba(27, 42, 75, 0.14);
   --transition: 0.3s ease;
@@ -110,6 +116,10 @@ button {
   --header-bg-scrolled: rgba(15, 23, 41, 0.94);
   --cta-bg: #1E2F55;
   --footer-bg: #0A1120;
+  --success: #5BD08A;
+  --success-bg: rgba(91, 208, 138, 0.12);
+  --danger: #F97066;
+  --danger-bg: rgba(249, 112, 102, 0.12);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
@@ -133,6 +143,10 @@ button {
     --header-bg-scrolled: rgba(15, 23, 41, 0.94);
     --cta-bg: #1E2F55;
     --footer-bg: #0A1120;
+  --success: #5BD08A;
+  --success-bg: rgba(91, 208, 138, 0.12);
+  --danger: #F97066;
+  --danger-bg: rgba(249, 112, 102, 0.12);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.45);
   }
@@ -246,6 +260,7 @@ h2 {
 }
 
 .btn-outline {
+  background: transparent;
   border-color: var(--heading);
   color: var(--heading);
 }
@@ -254,6 +269,11 @@ h2 {
   background: var(--heading);
   color: var(--bg);
   transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.55rem 1.05rem;
+  font-size: 0.9rem;
 }
 
 
@@ -295,11 +315,27 @@ h2 {
   object-fit: cover;
 }
 
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
 .logo-text {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
   color: var(--heading);
+}
+
+.logo-tagline {
+  margin-top: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-text);
 }
 
 .nav-list {
@@ -345,35 +381,37 @@ h2 {
   margin-inline-start: var(--space-xs);
 }
 
-.theme-toggle,
-.lang-switch {
+/* Dropdown menus: language and theme */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  min-width: 40px;
-  padding-inline: 0.65rem;
+  gap: 0.45rem;
+  height: 42px;
+  min-width: 42px;
+  padding-inline: 0.7rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: transparent;
   color: var(--heading);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   transition: var(--transition);
 }
 
-.theme-toggle:hover,
-.lang-switch:hover {
+.dropdown-toggle:hover,
+.dropdown-toggle[aria-expanded="true"] {
   background: var(--bg-alt);
+  border-color: var(--color-gold);
 }
 
-.theme-switcher {
-  position: relative;
-}
-
-/* Small line icons used by the theme switcher */
-.theme-icon,
-.theme-menu svg {
+/* Small line icons inside the toggles and menus */
+.dropdown svg {
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   fill: none;
@@ -383,7 +421,17 @@ h2 {
   stroke-linejoin: round;
 }
 
-/* The toggle shows the icon of the current choice */
+.dropdown-toggle .chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition);
+}
+
+.dropdown-toggle[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+/* The theme toggle shows the icon of the current choice */
 .theme-icon {
   display: none;
 }
@@ -394,7 +442,7 @@ h2 {
   display: block;
 }
 
-.theme-menu {
+.dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
   inset-inline-end: 0;
@@ -402,39 +450,78 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-width: 170px;
+  min-width: 190px;
   padding: 0.4rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
+  animation: dropdown-in 0.18s ease;
 }
 
-.theme-menu[hidden] {
+.dropdown-menu[hidden] {
   display: none;
 }
 
-.theme-menu button {
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   width: 100%;
-  padding: 0.55rem 0.7rem;
+  padding: 0.65rem 0.75rem;
   border: 0;
   border-radius: 8px;
   background: none;
   color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
   text-align: start;
   transition: var(--transition);
 }
 
-.theme-menu button:hover {
+.dropdown-item:hover {
   background: var(--bg-alt);
+  color: var(--heading);
 }
 
-.theme-menu button[aria-pressed="true"] {
+.dropdown-item[aria-pressed="true"],
+.dropdown-item[aria-current="page"] {
   background: var(--icon-bg);
   color: var(--heading);
+  font-weight: 600;
+}
+
+/* Tick shown next to the current choice */
+.dropdown-item .check {
+  margin-inline-start: auto;
+  color: var(--accent-text);
+  visibility: hidden;
+}
+
+.dropdown-item[aria-pressed="true"] .check,
+.dropdown-item[aria-current="page"] .check {
+  visibility: visible;
+}
+
+/* Language codes in the menu (EN / ع) */
+.lang-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 22px;
+  padding-inline: 0.3rem;
+  border-radius: 6px;
+  background: var(--bg-alt);
+  color: var(--heading);
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -664,23 +751,55 @@ h2 {
 
 /* --- Contact Section --- */
 
-.contact-grid {
+.contact-cards {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: var(--space-xl);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "showroom showroom hours"
+    "whatsapp hotline email"
+    "instagram instagram instagram";
+  gap: var(--space-md);
 }
 
-.contact-details {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg) var(--space-md);
-  align-content: start;
-}
+.contact-card-showroom { grid-area: showroom; }
+.contact-card-hours { grid-area: hours; }
+.contact-card-whatsapp { grid-area: whatsapp; }
+.contact-card-hotline { grid-area: hotline; }
+.contact-card-email { grid-area: email; }
+.contact-card-instagram { grid-area: instagram; }
 
-.contact-item {
+.contact-card {
   display: flex;
-  gap: var(--space-sm);
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 162, 39, 0.55);
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-card h3 {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.contact-card p {
+  color: var(--text-muted);
 }
 
 .contact-icon {
@@ -688,11 +807,17 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   background: var(--icon-bg);
   color: var(--icon);
+  transition: var(--transition);
+}
+
+.contact-card:hover .contact-icon {
+  background: var(--color-gold);
+  color: var(--color-navy);
 }
 
 .contact-icon svg {
@@ -705,51 +830,195 @@ h2 {
   stroke: none;
 }
 
-.contact-item h3 {
-  font-family: var(--font-body);
-  font-size: 1rem;
+/* Main detail of a card: phone number, email, handle */
+.contact-card .contact-value {
+  color: var(--heading);
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  overflow-wrap: anywhere;
 }
 
-.contact-item p,
-.contact-list li {
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: auto; /* keeps buttons along the bottom of every card */
+}
+
+.contact-note {
+  margin-top: auto;
+  font-size: 0.85rem;
+}
+
+/* Showroom: details on one side, the map on the other */
+.contact-card-showroom {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-md);
+}
+
+.contact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Instagram: one slim row */
+.contact-card-instagram {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.contact-card-instagram .contact-card-head {
+  flex: 1;
+  min-width: 220px;
+}
+
+.contact-card-instagram .contact-actions {
+  margin-top: 0;
+}
+
+/* Opening hours */
+.open-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.open-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.open-status.is-open {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.open-status.is-closed {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--border);
   color: var(--text-muted);
   font-size: 0.95rem;
 }
 
-.contact-item p + p,
-.contact-list li + li {
-  margin-top: 0.2rem;
+.hours-list li:last-child {
+  border-bottom: 0;
 }
 
-.contact-list a {
-  white-space: nowrap; /* keeps each name and number together on one line */
+.hours-time {
+  text-align: end;
 }
 
-.contact-item p + .text-link {
-  display: inline-block;
-  margin-top: 0.4rem;
-}
-
-.contact-item a:not(.text-link) {
+.hours-list li.is-today {
   color: var(--heading);
-  font-weight: 500;
+  font-weight: 600;
+}
+
+/* WhatsApp contacts */
+.wa-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wa-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   transition: var(--transition);
 }
 
-.contact-item a:not(.text-link):hover {
-  color: var(--link);
+.wa-contact:hover {
+  border-color: #179848;
+  background: rgba(23, 152, 72, 0.08);
+}
+
+.wa-avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #179848;
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.wa-contact-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.wa-contact-name {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.wa-contact-number {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  direction: ltr;
+  unicode-bidi: isolate; /* keeps "+968 ..." in the right order on the Arabic page */
+  text-align: start;
+}
+
+.wa-contact .arrow {
+  width: 18px;
+  height: 18px;
+  margin-inline-start: auto;
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: var(--transition);
+}
+
+.wa-contact:hover .arrow {
+  stroke: #179848;
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .wa-contact .arrow {
+  scale: -1 1;
+}
+
+[dir="rtl"] .wa-contact:hover .arrow {
+  transform: translateX(-3px);
 }
 
 .contact-map iframe {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 380px;
+  min-height: 240px;
   border: 0;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 
 
@@ -854,6 +1123,10 @@ h2 {
 
 .footer-brand .logo-text {
   color: var(--color-white);
+}
+
+.footer-brand .logo-tagline {
+  color: var(--color-gold);
 }
 
 .footer-brand p {
@@ -1025,16 +1298,21 @@ h2 {
     grid-column: 1 / -1;
   }
 
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-map iframe {
-    min-height: 320px;
+  .contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "showroom showroom"
+      "hours whatsapp"
+      "hotline email"
+      "instagram instagram";
   }
 }
 
 @media (max-width: 720px) {
+  .lang-name {
+    display: none;
+  }
+
   .hero,
   .section {
     padding-block: var(--space-xl);
@@ -1058,7 +1336,18 @@ h2 {
     justify-content: center;
   }
 
-  .contact-details {
+  .contact-cards {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "showroom"
+      "hours"
+      "whatsapp"
+      "hotline"
+      "email"
+      "instagram";
+  }
+
+  .contact-card-showroom {
     grid-template-columns: 1fr;
   }
 }
@@ -1073,9 +1362,12 @@ h2 {
     gap: 0.35rem;
   }
 
-  .theme-toggle,
-  .lang-switch {
+  .dropdown-toggle {
     padding-inline: 0.5rem;
+  }
+
+  .logo-tagline {
+    letter-spacing: 0.24em;
   }
 }
 
@@ -1088,9 +1380,16 @@ html[lang="ar"] body {
 
 html[lang="ar"] h1,
 html[lang="ar"] h2,
-html[lang="ar"] h3,
-html[lang="ar"] .logo-text {
+html[lang="ar"] h3 {
   font-weight: 700;
+  line-height: 1.45;
+}
+
+html[lang="ar"] .logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0;
   line-height: 1.45;
 }
 
@@ -1117,7 +1416,13 @@ html[lang="ar"] .eyebrow {
   .feature-card:hover,
   .collection-card:hover,
   .collection-card:hover img,
+  .contact-card:hover,
+  .wa-contact:hover .arrow,
   .wa-button:hover {
     transform: none;
+  }
+
+  .dropdown-menu {
+    animation: none;
   }
 }
