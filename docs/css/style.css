@@ -316,7 +316,7 @@ h2 {
 .nav-link::after {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   bottom: -2px;
   width: 0;
   height: 2px;
@@ -757,7 +757,7 @@ h2 {
 
 .wa-widget {
   position: fixed;
-  right: 20px;
+  inset-inline-end: 20px;
   bottom: 20px;
   z-index: 90;
 }
@@ -793,7 +793,7 @@ h2 {
 
 .wa-panel {
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   bottom: calc(100% + 12px);
   width: 280px;
   padding: var(--space-md);
@@ -943,6 +943,11 @@ h2 {
   justify-content: center;
 }
 
+.error-text-ar {
+  margin-top: var(--space-lg);
+  margin-bottom: 0;
+}
+
 
 /* --- Scroll reveal (classes added by script.js) --- */
 
@@ -1057,6 +1062,45 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Very small phones: keep the logo, language, theme and menu buttons on one line */
+@media (max-width: 420px) {
+  .logo-text {
+    font-size: 1.05rem;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
+  }
+
+  .theme-toggle,
+  .lang-switch {
+    padding-inline: 0.5rem;
+  }
+}
+
+
+/* --- Arabic page (right-to-left) --- */
+
+html[lang="ar"] body {
+  line-height: 1.8; /* Arabic letters need a little more room between lines */
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] .logo-text {
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* Spacing out or capitalising letters would break Arabic joined script */
+html[lang="ar"] .eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.95rem;
+}
+
 
 /* Respect the "reduce motion" setting in the visitor's OS */
 @media (prefers-reduced-motion: reduce) {
