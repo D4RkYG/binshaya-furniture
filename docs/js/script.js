@@ -54,6 +54,94 @@ document.addEventListener('keydown', (event) => {
 
 
 
+/* --- Header shadow and active nav link while scrolling --- */
+
+const siteHeader = document.querySelector('.site-header');
+const sections = [...navLinks].map((link) => document.querySelector(link.hash));
+
+function updateOnScroll() {
+  siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+
+  // The active section is the lowest one whose top has passed 40% of the screen height
+  const marker = window.innerHeight * 0.4;
+  let current = null;
+  let currentTop = -Infinity;
+
+  sections.forEach((section) => {
+    const top = section.getBoundingClientRect().top;
+    if (top <= marker && top > currentTop) {
+      current = section;
+      currentTop = top;
+    }
+  });
+
+  // At the very bottom, the last link wins even if its section is short
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+  if (atBottom) {
+    current = sections[sections.length - 1];
+  }
+
+  navLinks.forEach((link) => {
+    const isActive = current !== null && link.hash === '#' + current.id;
+    link.classList.toggle('active', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'location');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateOnScroll, { passive: true });
+window.addEventListener('resize', updateOnScroll);
+updateOnScroll();
+
+
+
+/* --- Fade content in as it scrolls into view --- */
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section-header, .feature-card, .collection-card, .cta-container, .contact-item, .contact-map').forEach((el) => {
+    // Only hide things that start below the screen, so nothing visible blinks on load
+    if (el.getBoundingClientRect().top > window.innerHeight) {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    }
+  });
+}
+
+
+
+/* --- WhatsApp chat button: close on outside click or Escape --- */
+
+const waWidget = document.getElementById('wa-widget');
+
+document.addEventListener('click', (event) => {
+  if (waWidget.open && !waWidget.contains(event.target)) {
+    waWidget.open = false;
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && waWidget.open) {
+    waWidget.open = false;
+    waWidget.querySelector('summary').focus();
+  }
+});
+
+
+
 /* --- Auto-update footer year --- */
 
 document.getElementById('current-year').textContent = new Date().getFullYear();
