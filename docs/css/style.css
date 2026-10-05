@@ -178,6 +178,14 @@ h2 {
   z-index: 100;
   background: var(--color-white);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow var(--transition), background-color var(--transition);
+}
+
+/* Added by script.js once the page is scrolled */
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(27, 42, 75, 0.12);
 }
 
 .nav-container {
@@ -230,8 +238,13 @@ h2 {
 }
 
 .nav-link:hover::after,
-.nav-link:focus-visible::after {
+.nav-link:focus-visible::after,
+.nav-link.active::after {
   width: 100%;
+}
+
+.nav-link.active {
+  color: var(--color-navy);
 }
 
 .nav-cta {
@@ -508,6 +521,30 @@ h2 {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.6);
 }
+
+
+/* --- Scroll reveal (classes added by script.js) --- */
+
+.reveal {
+  opacity: 0;
+  translate: 0 24px;
+  /* hover effects keep their own speed; only the fade-in is delayed */
+  transition:
+    opacity 0.6s ease var(--reveal-delay, 0s),
+    translate 0.6s ease var(--reveal-delay, 0s),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.reveal.visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Cards in a row appear one after another */
+.reveal:nth-child(2) { --reveal-delay: 0.1s; }
+.reveal:nth-child(3) { --reveal-delay: 0.2s; }
+.reveal:nth-child(4) { --reveal-delay: 0.3s; }
 
 
 /* --- Responsive Design --- */
