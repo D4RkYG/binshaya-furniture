@@ -48,8 +48,10 @@ button {
   --color-text-light: #5B6472;
 
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  /* Fraunces for English headings, Noto Naskh Arabic for Arabic ones;
+     IBM Plex Sans Arabic covers body text in both languages */
+  --font-heading: 'Fraunces', 'Noto Naskh Arabic', serif;
+  --font-body: 'IBM Plex Sans Arabic', sans-serif;
 
   /* Spacing scale */
   --space-xs: 0.5rem;
@@ -80,8 +82,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+strong {
+  font-weight: 600; /* the body font is loaded up to 600 */
+}
+
 h1, h2, h3 {
   font-family: var(--font-heading);
+  font-weight: 600;
   line-height: 1.2;
   color: var(--color-navy);
   text-wrap: balance; /* spreads words evenly so no word is left alone on the last line */
