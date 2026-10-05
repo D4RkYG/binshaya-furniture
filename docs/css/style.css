@@ -36,6 +36,7 @@ button {
 :root {
   /* Colors */
   --color-navy: #1B2A4B;
+  --color-navy-dark: #131F38;
   --color-gold: #C9A227;
   --color-gold-dark: #B48E1F;
   --color-gold-text: #806210; /* gold that stays readable as small text on light backgrounds */
@@ -61,6 +62,7 @@ button {
   /* Shape & motion */
   --radius: 10px;
   --shadow: 0 10px 30px rgba(27, 42, 75, 0.08);
+  --shadow-lg: 0 18px 40px rgba(27, 42, 75, 0.14);
   --transition: 0.3s ease;
 
   /* Layout */
@@ -82,6 +84,7 @@ h1, h2, h3 {
   font-family: var(--font-heading);
   line-height: 1.2;
   color: var(--color-navy);
+  text-wrap: balance; /* spreads words evenly so no word is left alone on the last line */
 }
 
 h2 {
@@ -163,6 +166,7 @@ h2 {
 .btn-outline:hover {
   background: var(--color-navy);
   color: var(--color-white);
+  transform: translateY(-2px);
 }
 
 
@@ -190,8 +194,8 @@ h2 {
 }
 
 .logo-img {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -383,12 +387,18 @@ h2 {
 
 .collection-card:hover {
   transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .collection-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.collection-card:hover img {
+  transform: scale(1.05);
 }
 
 .collection-info {
@@ -438,7 +448,7 @@ h2 {
 }
 
 .site-footer {
-  background: var(--color-navy);
+  background: var(--color-navy-dark);
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -592,8 +602,10 @@ h2 {
   }
 
   .btn-primary:hover,
+  .btn-outline:hover,
   .feature-card:hover,
-  .collection-card:hover {
+  .collection-card:hover,
+  .collection-card:hover img {
     transform: none;
   }
 }
