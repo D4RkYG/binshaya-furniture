@@ -146,7 +146,10 @@ showThemeChoice(root.dataset.theme || 'system');
 /* --- Header shadow and active nav link while scrolling --- */
 
 const siteHeader = document.querySelector('.site-header');
-const sections = [...navLinks].map((link) => document.querySelector(link.hash));
+// Only links to a section on this page take part; a link to another page or a missing section is skipped
+const sections = [...navLinks]
+  .map((link) => link.hash && document.getElementById(link.hash.slice(1)))
+  .filter(Boolean);
 
 function updateOnScroll() {
   siteHeader.classList.toggle('scrolled', window.scrollY > 10);
@@ -166,7 +169,7 @@ function updateOnScroll() {
 
   // At the very bottom, the last link wins even if its section is short
   const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-  if (atBottom) {
+  if (atBottom && sections.length > 0) {
     current = sections[sections.length - 1];
   }
 
@@ -201,7 +204,7 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.section-header, .feature-card, .collection-card, .cta-container, .contact-card').forEach((el) => {
+  document.querySelectorAll('.section-header, .about-content, .stat, .feature-card, .collection-card, .cta-container, .contact-card').forEach((el) => {
     // Only hide things that start below the screen, so nothing visible blinks on load
     if (el.getBoundingClientRect().top > window.innerHeight) {
       el.classList.add('reveal');
@@ -212,13 +215,112 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window) {
 
 
 
+/* --- Count up the About numbers each time they scroll into view --- */
+// The final numbers are written in the page, so they still show without JavaScript or with reduced motion.
+
+const statNumbers = document.querySelectorAll('.stat-number');
+
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const counters = new Map();
+
+  statNumbers.forEach((el) => {
+    const final = el.textContent;
+    const target = Number(final.replace(/\D/g, ''));
+    let frame = null;
+
+    // Screen readers get the final number; the changing digits are hidden from them
+    const finalText = document.createElement('span');
+    finalText.className = 'visually-hidden';
+    finalText.textContent = final;
+    el.after(finalText);
+    el.setAttribute('aria-hidden', 'true');
+
+    const start = () => {
+      if (frame !== null) return; // already counting (or done) during this visit
+      const duration = 1800;
+      let startTime = null;
+
+      // Hold the final width so the "+" doesn't shift while counting (measured now, once the fonts have loaded)
+      el.textContent = final;
+      el.style.minWidth = `${el.offsetWidth}px`;
+      el.textContent = '0';
+
+      const step = (time) => {
+        if (startTime === null) startTime = time;
+        const progress = Math.min((time - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // quick start, gentle finish
+        el.textContent = Math.round(target * eased).toLocaleString('en-US');
+        if (progress < 1) frame = requestAnimationFrame(step);
+      };
+
+      frame = requestAnimationFrame(step);
+    };
+
+    // Back to zero once off screen, ready to count again on the next visit
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      frame = null;
+      el.textContent = '0';
+    };
+
+    counters.set(el, { start, reset });
+    el.textContent = '0';
+  });
+
+  // Start when most of a number is on screen; reset only once it has left completely
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const counter = counters.get(entry.target);
+      if (entry.intersectionRatio >= 0.6) {
+        counter.start();
+      } else if (!entry.isIntersecting) {
+        counter.reset();
+      }
+    });
+  }, { threshold: [0, 0.6] });
+
+  statNumbers.forEach((el) => countObserver.observe(el));
+}
+
+
+
 /* --- WhatsApp chat button: close on outside click or Escape --- */
 
 const waWidget = document.getElementById('wa-widget');
 
 document.addEventListener('click', (event) => {
-  if (waWidget.open && !waWidget.contains(event.target)) {
+  if (waWidget.open && !waWidget.contains(event.target) && !event.target.closest('[data-open-whatsapp]')) {
     waWidget.open = false;
+  }
+});
+
+// "Ask on WhatsApp" links on the collection cards open the chat button's list of contacts,
+// with a message that names the room (data-whatsapp-message). Without JavaScript they simply jump to the contact section.
+const waLinks = [...waWidget.querySelectorAll('.wa-list a')];
+const waDefaultHrefs = waLinks.map((a) => a.href);
+
+function setWhatsAppMessage(message) {
+  waLinks.forEach((a, i) => {
+    const url = new URL(waDefaultHrefs[i]);
+    a.href = `${url.origin}${url.pathname}?phone=${url.searchParams.get('phone')}&text=${encodeURIComponent(message)}`;
+  });
+}
+
+document.querySelectorAll('[data-open-whatsapp]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (link.dataset.whatsappMessage) setWhatsAppMessage(link.dataset.whatsappMessage);
+    waWidget.open = true;
+    waLinks[0].focus();
+  });
+});
+
+// Back to the general greeting whenever the list closes
+waWidget.addEventListener('toggle', () => {
+  if (!waWidget.open) {
+    waLinks.forEach((a, i) => {
+      a.href = waDefaultHrefs[i];
+    });
   }
 });
 

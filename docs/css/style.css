@@ -64,7 +64,7 @@ button {
   --border: rgba(27, 42, 75, 0.14);
   --header-bg: #FFFFFF;
   --header-bg-scrolled: rgba(255, 255, 255, 0.96);
-  --cta-bg: #1B2A4B;
+  --band-bg: #1B2A4B; /* navy strips: About and the call to action */
   --footer-bg: #131F38;
   --success: #12753A;
   --success-bg: rgba(18, 117, 58, 0.1);
@@ -97,58 +97,60 @@ button {
   --container-width: 1180px;
 }
 
-/* Dark theme: chosen in the theme menu, or "System" when the device is set to dark */
+/* Dark theme: chosen in the theme menu, or "System" when the device is set to dark.
+   Black and dark grey with gold accents; the navy bands turn dark grey, so there is no blue.
+   The two blocks below hold the same values; change both together. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0F1729;
-  --bg-alt: #141E33;
-  --surface: #1A253D;
-  --heading: #F2EDE3;
-  --text: #D9DEE7;
-  --text-muted: #A7B0BF;
-  --accent-text: #D9B44A;
+  --bg: #111111;
+  --bg-alt: #181818;
+  --surface: #202020;
+  --heading: #F5F5F5;
+  --text: #E0E0E0;
+  --text-muted: #A8A8A8;
+  --accent-text: #DDB955;
   --link: #8FC1E3;
   --focus: #8FC1E3;
-  --icon: #F2EDE3;
-  --icon-bg: rgba(201, 162, 39, 0.16);
-  --border: rgba(255, 255, 255, 0.12);
-  --header-bg: #0F1729;
-  --header-bg-scrolled: rgba(15, 23, 41, 0.94);
-  --cta-bg: #1E2F55;
-  --footer-bg: #0A1120;
+  --icon: #E3C064;
+  --icon-bg: rgba(221, 185, 85, 0.12);
+  --border: rgba(255, 255, 255, 0.1);
+  --header-bg: #111111;
+  --header-bg-scrolled: rgba(17, 17, 17, 0.92);
+  --band-bg: #262626;
+  --footer-bg: #0A0A0A;
   --success: #5BD08A;
   --success-bg: rgba(91, 208, 138, 0.12);
   --danger: #F97066;
   --danger-bg: rgba(249, 112, 102, 0.12);
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #0F1729;
-    --bg-alt: #141E33;
-    --surface: #1A253D;
-    --heading: #F2EDE3;
-    --text: #D9DEE7;
-    --text-muted: #A7B0BF;
-    --accent-text: #D9B44A;
+    --bg: #111111;
+    --bg-alt: #181818;
+    --surface: #202020;
+    --heading: #F5F5F5;
+    --text: #E0E0E0;
+    --text-muted: #A8A8A8;
+    --accent-text: #DDB955;
     --link: #8FC1E3;
     --focus: #8FC1E3;
-    --icon: #F2EDE3;
-    --icon-bg: rgba(201, 162, 39, 0.16);
-    --border: rgba(255, 255, 255, 0.12);
-    --header-bg: #0F1729;
-    --header-bg-scrolled: rgba(15, 23, 41, 0.94);
-    --cta-bg: #1E2F55;
-    --footer-bg: #0A1120;
-  --success: #5BD08A;
-  --success-bg: rgba(91, 208, 138, 0.12);
-  --danger: #F97066;
-  --danger-bg: rgba(249, 112, 102, 0.12);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.45);
+    --icon: #E3C064;
+    --icon-bg: rgba(221, 185, 85, 0.12);
+    --border: rgba(255, 255, 255, 0.1);
+    --header-bg: #111111;
+    --header-bg-scrolled: rgba(17, 17, 17, 0.92);
+    --band-bg: #262626;
+    --footer-bg: #0A0A0A;
+    --success: #5BD08A;
+    --success-bg: rgba(91, 208, 138, 0.12);
+    --danger: #F97066;
+    --danger-bg: rgba(249, 112, 102, 0.12);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -166,6 +168,10 @@ body {
 
 strong {
   font-weight: 600; /* the body font is loaded up to 600 */
+}
+
+p {
+  text-wrap: pretty; /* avoids a single word left alone on the last line */
 }
 
 h1, h2, h3 {
@@ -187,7 +193,7 @@ h2 {
   outline-offset: 3px;
 }
 
-.cta :focus-visible,
+.band :focus-visible,
 .site-footer :focus-visible {
   outline-color: var(--color-gold);
 }
@@ -212,6 +218,10 @@ h2 {
   max-width: 600px;
   margin-inline: auto;
   margin-bottom: var(--space-xl);
+}
+
+.section-intro {
+  color: var(--text-muted);
 }
 
 /* Hidden on screen but still read out by screen readers */
@@ -292,7 +302,7 @@ h2 {
 .site-header.scrolled {
   background: var(--header-bg-scrolled);
   backdrop-filter: blur(8px);
-  box-shadow: 0 6px 20px rgba(27, 42, 75, 0.12);
+  box-shadow: 0 1px 0 var(--border), 0 6px 20px rgba(27, 42, 75, 0.12); /* the hairline keeps it apart from the page in dark mode */
 }
 
 .nav-container {
@@ -730,20 +740,82 @@ h2 {
 }
 
 
-/* --- CTA Section --- */
+/* --- Navy bands (About and CTA) --- */
 
-.cta {
-  background: var(--cta-bg);
+.band {
+  background: var(--band-bg);
   color: var(--color-white);
   text-align: center;
 }
 
-.cta h2 {
+.band h2 {
   color: var(--color-white);
 }
 
-.cta p {
+.band p {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.band .eyebrow {
+  color: var(--color-gold);
+}
+
+
+/* --- About Section --- */
+
+.about-content {
+  max-width: 680px;
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stat {
+  padding: var(--space-xs) var(--space-md);
+}
+
+.stat + .stat {
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-value {
+  direction: ltr; /* "+50" reads the same way on the Arabic page */
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.08em;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-white);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* script.js holds this at its final width while counting, so the "+" stays put */
+.stat-number {
+  text-align: left;
+}
+
+.stat-plus {
+  color: var(--color-gold);
+}
+
+.stat-label {
+  display: block;
+  margin-top: var(--space-xs);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+
+/* --- CTA Section --- */
+
+.cta p {
   margin-bottom: var(--space-lg);
   max-width: 500px;
   margin-inline: auto;
@@ -1067,6 +1139,7 @@ h2 {
   width: 280px;
   padding: var(--space-md);
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
 }
@@ -1130,6 +1203,7 @@ h2 {
 }
 
 .footer-brand p {
+  max-width: 340px;
   margin-top: var(--space-sm);
   color: rgba(255, 255, 255, 0.65);
 }
@@ -1248,10 +1322,9 @@ h2 {
 
 /* --- Responsive Design --- */
 
-@media (max-width: 960px) {
-  /* Tablets and phones use the menu button, leaving room for the language and theme buttons */
-  .nav-list,
-  .nav-cta {
+/* Below 1100px the links no longer fit beside the buttons, so they move into the menu button */
+@media (max-width: 1100px) {
+  .nav-list {
     display: none;
   }
 
@@ -1270,6 +1343,13 @@ h2 {
     background: var(--surface);
     padding: var(--space-md);
     box-shadow: var(--shadow);
+  }
+}
+
+@media (max-width: 960px) {
+  /* Tablets and phones drop the showroom button, leaving room for the language and theme buttons */
+  .nav-cta {
+    display: none;
   }
 
   .hero-container {
@@ -1336,6 +1416,10 @@ h2 {
     justify-content: center;
   }
 
+  .footer-brand p {
+    margin-inline: auto;
+  }
+
   .contact-cards {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -1349,6 +1433,19 @@ h2 {
 
   .contact-card-showroom {
     grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    padding: var(--space-md) 0;
+  }
+
+  .stat + .stat {
+    border-inline-start: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 }
 
